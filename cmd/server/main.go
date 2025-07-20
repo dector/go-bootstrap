@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	moto := fmt.Sprintf("%s v%s", "mymyapp", meta.G.Version)
+	moto := fmt.Sprintf("%s v%s", meta.G.Name, meta.G.Version)
 	fmt.Println(moto)
 
 	cfg := config.NewServerConfig()

@@ -8,6 +8,7 @@ import (
 )
 
 func init() {
+	G.Name = "mymyapp-name"
 	G.Version = parseVersion()
 }
 
