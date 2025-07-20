@@ -1,0 +1,32 @@
+version: "3"
+
+tasks:
+  default:
+    desc: View all tasks
+    cmds:
+      - task --list-all
+    silent: true
+
+  dev:
+    desc: Run app in dev mode (with proxy)
+    cmds:
+      - go tool air
+    silent: true
+
+  run:
+    desc: Run app
+    cmds:
+      - go run ./cmd/server
+    silent: true
+
+  build:
+    desc: Build app binary
+    cmds:
+      - go build -o out/mymyapp-latest ./cmd/server
+    silent: true
+
+  build:air:
+    desc: Build air-compatible app binary
+    cmds:
+      - go build -o out/air.exe ./cmd/server
+    silent: true

@@ -5,7 +5,7 @@ tmp_dir = "out"
 [build]
 args_bin = []
 bin = "./out/air.exe"
-cmd = "go build -o ./out/air.exe ."
+cmd = "task build:air"
 delay = 100
 exclude_dir = ["assets", "tmp", "vendor", "testdata", "out", "docs"]
 exclude_file = []
