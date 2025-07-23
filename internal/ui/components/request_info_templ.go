@@ -8,7 +8,10 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "net/http"
+import (
+	"net/http"
+	"sort"
+)
 
 type RequestData struct {
 	Method     string
@@ -48,7 +51,7 @@ func RequestInfo(data RequestData) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(data.Method)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 20, Col: 109}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 23, Col: 109}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -61,7 +64,7 @@ func RequestInfo(data RequestData) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(data.Path)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 21, Col: 105}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 24, Col: 105}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -74,7 +77,7 @@ func RequestInfo(data RequestData) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(data.RemoteAddr)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 22, Col: 121}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 25, Col: 121}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -87,7 +90,7 @@ func RequestInfo(data RequestData) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(data.UserAgent)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 23, Col: 116}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 26, Col: 116}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -102,7 +105,13 @@ func RequestInfo(data RequestData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			for key, values := range data.Query {
+			queryKeys := make([]string, 0, len(data.Query))
+			for key := range data.Query {
+				queryKeys = append(queryKeys, key)
+			}
+			sort.Strings(queryKeys)
+			for _, key := range queryKeys {
+				values := data.Query[key]
 				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<li><code class=\"bg-neutral-700 text-neutral-200 px-2 py-1 rounded text-sm\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -110,7 +119,7 @@ func RequestInfo(data RequestData) templ.Component {
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(key)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 32, Col: 84}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 39, Col: 84}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
@@ -134,7 +143,7 @@ func RequestInfo(data RequestData) templ.Component {
 					var templ_7745c5c3_Var7 string
 					templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 37, Col: 44}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 44, Col: 44}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 					if templ_7745c5c3_Err != nil {
@@ -160,7 +169,13 @@ func RequestInfo(data RequestData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			for key, values := range data.Headers {
+			headerKeys := make([]string, 0, len(data.Headers))
+			for key := range data.Headers {
+				headerKeys = append(headerKeys, key)
+			}
+			sort.Strings(headerKeys)
+			for _, key := range headerKeys {
+				values := data.Headers[key]
 				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<li><code class=\"bg-neutral-700 text-neutral-200 px-2 py-1 rounded text-sm\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -168,7 +183,7 @@ func RequestInfo(data RequestData) templ.Component {
 				var templ_7745c5c3_Var8 string
 				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(key)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 51, Col: 84}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 62, Col: 84}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 				if templ_7745c5c3_Err != nil {
@@ -192,7 +207,7 @@ func RequestInfo(data RequestData) templ.Component {
 					var templ_7745c5c3_Var9 string
 					templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 56, Col: 44}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 67, Col: 44}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 					if templ_7745c5c3_Err != nil {
@@ -218,7 +233,10 @@ func RequestInfo(data RequestData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			for _, cookie := range data.Cookies {
+			sortedCookies := make([]*http.Cookie, len(data.Cookies))
+			copy(sortedCookies, data.Cookies)
+			sort.Slice(sortedCookies, func(i, j int) bool { return sortedCookies[i].Name < sortedCookies[j].Name })
+			for _, cookie := range sortedCookies {
 				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "<li><code class=\"bg-neutral-700 text-neutral-200 px-2 py-1 rounded text-sm\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -226,7 +244,7 @@ func RequestInfo(data RequestData) templ.Component {
 				var templ_7745c5c3_Var10 string
 				templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(cookie.Name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 70, Col: 92}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 84, Col: 92}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 				if templ_7745c5c3_Err != nil {
@@ -239,7 +257,7 @@ func RequestInfo(data RequestData) templ.Component {
 				var templ_7745c5c3_Var11 string
 				templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(cookie.Value)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 71, Col: 50}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 85, Col: 50}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 				if templ_7745c5c3_Err != nil {
@@ -257,7 +275,7 @@ func RequestInfo(data RequestData) templ.Component {
 					var templ_7745c5c3_Var12 string
 					templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(cookie.Domain)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 73, Col: 64}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/components/request_info.templ`, Line: 87, Col: 64}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 					if templ_7745c5c3_Err != nil {
