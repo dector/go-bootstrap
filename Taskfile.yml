@@ -27,6 +27,26 @@ tasks:
 
   build:air:
     desc: Build air-compatible app binary
+    deps:
+      - templ:gen
     cmds:
       - go build -o out/air.exe ./cmd/server
+    silent: true
+
+  format:
+    desc: Format code
+    cmds:
+      - go fmt ./...
+    silent: true
+
+  templ:gen:
+    desc: Build templ files
+    cmds:
+      - go tool templ generate
+    silent: true
+
+  templ:fmt:
+    desc: Format templ files
+    cmds:
+      - go tool templ fmt
     silent: true

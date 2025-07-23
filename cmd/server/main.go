@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"mymyapp/internal/config"
+	"mymyapp/internal/ui/components"
+	"mymyapp/internal/ui/pages"
 	"mymyapp/meta"
 	"net/http"
-	"strings"
 
 	"github.com/go-chi/chi/v5"
 	mw "github.com/go-chi/chi/v5/middleware"
@@ -23,11 +24,18 @@ func main() {
 	r.Use(mw.RealIP)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		sb := strings.Builder{}
-		sb.WriteString("<body>")
-		sb.WriteString(moto)
-		sb.WriteString("</body>")
-		w.Write([]byte(sb.String()))
+		data := components.RequestData{
+			Method:     r.Method,
+			Path:       r.URL.Path,
+			Query:      r.URL.Query(),
+			Headers:    r.Header,
+			Cookies:    r.Cookies(),
+			RemoteAddr: r.RemoteAddr,
+			UserAgent:  r.UserAgent(),
+		}
+
+		component := pages.RequestDebugPage(data)
+		component.Render(r.Context(), w)
 	})
 
 	fmt.Printf("Running on http://localhost:%s\n", cfg.Port)

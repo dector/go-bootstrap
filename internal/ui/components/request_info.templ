@@ -1,0 +1,81 @@
+package components
+
+import "net/http"
+
+type RequestData struct {
+	Method     string
+	Path       string
+	Query      map[string][]string
+	Headers    map[string][]string
+	Cookies    []*http.Cookie
+	RemoteAddr string
+	UserAgent  string
+}
+
+templ RequestInfo(data RequestData) {
+	<div class="request-info" style="font-family: monospace; background: #f5f5f5; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+		<h2 style="margin-top: 0; color: #333;">Request Information</h2>
+		
+		<div style="margin-bottom: 1rem;">
+			<strong>Method:</strong> <span style="color: #0066cc;">{ data.Method }</span><br/>
+			<strong>Path:</strong> <span style="color: #0066cc;">{ data.Path }</span><br/>
+			<strong>Remote Address:</strong> <span style="color: #0066cc;">{ data.RemoteAddr }</span><br/>
+			<strong>User Agent:</strong> <span style="color: #0066cc;">{ data.UserAgent }</span>
+		</div>
+
+		if len(data.Query) > 0 {
+			<div style="margin-bottom: 1rem;">
+				<strong>Query Parameters:</strong>
+				<ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+					for key, values := range data.Query {
+						<li>
+							<code style="background: #e8e8e8; padding: 2px 4px; border-radius: 3px;">{ key }</code>: 
+							for i, value := range values {
+								if i > 0 {
+									<span>, </span>
+								}
+								<span style="color: #008000;">{ value }</span>
+							}
+						</li>
+					}
+				</ul>
+			</div>
+		}
+
+		if len(data.Headers) > 0 {
+			<div style="margin-bottom: 1rem;">
+				<strong>Headers:</strong>
+				<ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+					for key, values := range data.Headers {
+						<li>
+							<code style="background: #e8e8e8; padding: 2px 4px; border-radius: 3px;">{ key }</code>: 
+							for i, value := range values {
+								if i > 0 {
+									<span>, </span>
+								}
+								<span style="color: #008000;">{ value }</span>
+							}
+						</li>
+					}
+				</ul>
+			</div>
+		}
+
+		if len(data.Cookies) > 0 {
+			<div style="margin-bottom: 1rem;">
+				<strong>Cookies:</strong>
+				<ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+					for _, cookie := range data.Cookies {
+						<li>
+							<code style="background: #e8e8e8; padding: 2px 4px; border-radius: 3px;">{ cookie.Name }</code>: 
+							<span style="color: #008000;">{ cookie.Value }</span>
+							if cookie.Domain != "" {
+								<span style="color: #666;"> (domain: { cookie.Domain })</span>
+							}
+						</li>
+					}
+				</ul>
+			</div>
+		}
+	</div>
+}

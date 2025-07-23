@@ -1,0 +1,10 @@
+package pages
+
+import "mymyapp/internal/ui/components"
+
+templ RequestDebugPage(data components.RequestData) {
+	@BaseLayout("Request Debug") {
+		<h1>Request Debug Information</h1>
+		@components.RequestInfo(data)
+	}
+}
