@@ -4,7 +4,9 @@ import "mymyapp/internal/ui/components"
 
 templ RequestDebugPage(data components.RequestData) {
 	@BaseLayout("Request Debug") {
-		<h1>Request Debug Information</h1>
-		@components.RequestInfo(data)
+		<div class="container mx-auto px-4 py-8">
+			<h1 class="text-3xl font-bold text-neutral-100 mb-6">Request Debug Information</h1>
+			@components.RequestInfo(data)
+		</div>
 	}
 }
