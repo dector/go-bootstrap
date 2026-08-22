@@ -13,7 +13,7 @@ tasks:
       PORT: '{{.PORT | default "8080"}}'
       PROXY_PORT: '{{.PROXY_PORT | default "3000"}}'
     cmds:
-      - go tool gust -e 'task gen && exec go run ./cmd/server' -p "$PORT:$PROXY_PORT" --exclude out --exclude .git
+      - go tool gust -e 'task gen && exec go run ./cmd/server' -p "$PORT:$PROXY_PORT" --exclude out --exclude .git --exclude.glob '*_templ.go'
     silent: true
 
   run:

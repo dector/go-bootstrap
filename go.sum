@@ -12,8 +12,8 @@ github.com/coder/websocket v1.8.13 h1:f3QZdXy7uGVz+4uCJy2nTZyM0yTBj8yANEHhqlXZ9F
 github.com/coder/websocket v1.8.13/go.mod h1:LNVeNrXQZfe5qhS9ALED3uA+l5pPqvwXg3CKoDBB2gs=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/dector/gust v0.0.0-20260822194759-4f5baf2710b9 h1:bs5wnT86zHGE+aiYUH4kAVhF4T8wsRlGR4RkrgLo8Pg=
-github.com/dector/gust v0.0.0-20260822194759-4f5baf2710b9/go.mod h1:4R/C5q5nP4SY+GfWMAA/61mm2gyxuurykZNPSQ5tKvw=
+github.com/dector/gust v0.0.0-20260822232243-5ab61da06e4c h1:P2PwjlYDUsMhp8ZAmBSrGaGA7q4JVca3xhl4yeVyRaA=
+github.com/dector/gust v0.0.0-20260822232243-5ab61da06e4c/go.mod h1:4R/C5q5nP4SY+GfWMAA/61mm2gyxuurykZNPSQ5tKvw=
 github.com/fatih/color v1.18.0 h1:S8gINlzdQ840/4pfAwic/ZE0djQEH3wM94VfqLTZcOM=
 github.com/fatih/color v1.18.0/go.mod h1:4FelSpRwEGDpQ12mAdzqdOukCy4u8WUtOY6lkT/6HfU=
 github.com/fsnotify/fsnotify v1.9.0 h1:2Ml+OJNzbYCTzsxtv8vKSFD9PbJjmhYF14k/jKC7S9k=
