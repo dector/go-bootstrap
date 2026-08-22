@@ -38,6 +38,7 @@ func main() {
 		component.Render(r.Context(), w)
 	})
 
-	fmt.Printf("Running on http://localhost:%s\n", cfg.Port)
-	http.ListenAndServe(":"+cfg.Port, r)
+	addr := "127.0.0.1:" + cfg.Port
+	fmt.Printf("Running on http://%s\n", addr)
+	http.ListenAndServe(addr, r)
 }
