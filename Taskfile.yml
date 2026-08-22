@@ -9,8 +9,11 @@ tasks:
 
   dev:
     desc: Run app in dev mode (with proxy)
+    env:
+      PORT: '{{.PORT | default "8080"}}'
+      PROXY_PORT: '{{.PROXY_PORT | default "3000"}}'
     cmds:
-      - go tool air
+      - go tool gust -e 'task gen && exec go run ./cmd/server' -p "$PORT:$PROXY_PORT" --exclude out --exclude .git
     silent: true
 
   run:
@@ -21,16 +24,10 @@ tasks:
 
   build:
     desc: Build app binary
+    deps:
+      - gen
     cmds:
       - go build -o out/mymyapp-latest ./cmd/server
-    silent: true
-
-  build:air:
-    desc: Build air-compatible app binary
-    deps:
-      - templ:gen
-    cmds:
-      - go build -o out/air.exe ./cmd/server
     silent: true
 
   format:
@@ -39,11 +36,18 @@ tasks:
       - go fmt ./...
     silent: true
 
-  templ:gen:
+  gen:
+    desc: Generate files
+    deps:
+      - gen:templ
+    silent: true
+
+  gen:templ:
     desc: Build templ files
     cmds:
       - go tool templ generate
     silent: true
+
 
   templ:fmt:
     desc: Format templ files

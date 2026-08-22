@@ -5,7 +5,7 @@
 ## Features
 
 - Customizable port via `PORT` env variable.
-- Automatic hot reload via `air` on port `3000` (use `task dev`).
+- Automatic hot reload via `gust` on port `3000` (use `task dev`).
 - Centralized meta-info in `meta/meta.yml` file.
 
 ## Defaults
