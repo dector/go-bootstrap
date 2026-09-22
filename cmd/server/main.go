@@ -5,6 +5,7 @@ import (
 	"mymyapp/internal/config"
 	"mymyapp/internal/ui/components"
 	"mymyapp/internal/ui/pages"
+	"mymyapp/internal/utils"
 	"mymyapp/meta"
 	"net/http"
 
@@ -46,5 +47,20 @@ func newRouter() *chi.Mux {
 		component.Render(r.Context(), w)
 	})
 
+	r.Get("/health", healthHandler)
+
 	return r
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Vary", "Accept")
+
+	if utils.AcceptsJSON(r) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok"}`))
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Write([]byte("OK"))
 }
