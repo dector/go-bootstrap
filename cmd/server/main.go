@@ -18,6 +18,14 @@ func main() {
 
 	cfg := config.NewServerConfig()
 
+	r := newRouter()
+
+	addr := "127.0.0.1:" + cfg.Port
+	fmt.Printf("Running on http://%s\n", addr)
+	http.ListenAndServe(addr, r)
+}
+
+func newRouter() *chi.Mux {
 	r := chi.NewRouter()
 	r.Use(mw.Logger)
 	r.Use(mw.Recoverer)
@@ -38,7 +46,5 @@ func main() {
 		component.Render(r.Context(), w)
 	})
 
-	addr := "127.0.0.1:" + cfg.Port
-	fmt.Printf("Running on http://%s\n", addr)
-	http.ListenAndServe(addr, r)
+	return r
 }
