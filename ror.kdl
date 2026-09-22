@@ -1,0 +1,78 @@
+task dev {
+  description "Run app in dev mode (with gust proxy)"
+
+  env PORT="8080" { expose }
+  env PROXY_PORT="3000" { expose }
+
+  cmd #"""
+    go tool gust \
+      -p "$PORT:$PROXY_PORT" \
+      -e 'exec ror run' \
+      --e.before 'ror gen' \
+      --exclude out \
+      --exclude .git \
+      --exclude .jj \
+      --exclude data \
+      --exclude.glob '*_templ.go'
+    """#
+}
+
+task run {
+  description "Run app"
+
+  cmd "go run ./cmd/server"
+}
+
+task build {
+  description "Build app binary"
+
+  depends {
+    on "gen"
+  }
+  cmd "go build -o out/mymyapp-latest ./cmd/server"
+}
+
+//region Generate
+
+task gen {
+  description "Generate files"
+
+  depends {
+    on "gen:templ"
+  }
+}
+
+task gen:templ {
+  description "Build templ files"
+
+  cmd "go tool templ generate"
+}
+
+//endregion
+
+//region Format
+
+task fmt {
+  description "Format everything"
+
+  depends {
+    on "fmt:go"
+    on "fmt:templ"
+  }
+}
+
+task fmt:go {
+  description "Format code"
+
+  cmd "go fmt ./..."
+}
+
+
+task fmt:templ {
+  description "Format templ files"
+
+  cmd "go tool templ fmt"
+}
+
+//endregion
+
