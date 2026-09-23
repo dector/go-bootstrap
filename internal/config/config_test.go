@@ -13,6 +13,7 @@ func TestServerConfigHost(t *testing.T) {
 	}{
 		{"empty", "", "localhost"},
 		{"explicit IPv4", "0.0.0.0", "0.0.0.0"},
+		{"wildcard shortcut", "*", "0.0.0.0"},
 		{"explicit IPv6", "::1", "::1"},
 	} {
 		t.Run(tt.name, func(t *testing.T) {

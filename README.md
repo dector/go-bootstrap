@@ -10,5 +10,5 @@
 
 ## Defaults
 
-- Default host (when `HOST` is unset or empty): `localhost` (loopback only). Set `HOST=0.0.0.0` to listen on all IPv4 interfaces.
+- Default host (when `HOST` is unset or empty): `localhost` (loopback only). Set `HOST=0.0.0.0` (or `HOST="*"`) to listen on all IPv4 interfaces.
 - Default port: `8080`.

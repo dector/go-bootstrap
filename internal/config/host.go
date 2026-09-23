@@ -6,9 +6,12 @@ const DefaultHost = "localhost"
 
 func parseHostOrDefault() string {
 	host := os.Getenv("HOST")
-	if host == "" {
+	switch host {
+	case "":
 		return DefaultHost
+	case "*":
+		return "0.0.0.0"
+	default:
+		return host
 	}
-
-	return host
 }
