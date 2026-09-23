@@ -25,6 +25,8 @@ func TestRootUsesRealClientIP(t *testing.T) {
 		`type="module" src="/assets/datastar-v1.0.4.js"`,
 		`data-on:click="$showHeaders = !$showHeaders"`,
 		`data-show="$showHeaders"`,
+		`data-on:click="@get('/server-time')"`,
+		`id="server-time"`,
 	} {
 		if !strings.Contains(rec.Body.String(), want) {
 			t.Errorf("root page does not contain %q", want)
@@ -59,6 +61,28 @@ func TestDatastarAsset(t *testing.T) {
 	}
 	if !strings.Contains(rec.Body.String(), "Datastar v1.0.4") {
 		t.Error("Datastar asset body is missing")
+	}
+}
+
+func TestServerTime(t *testing.T) {
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/server-time", nil)
+	req.Header.Set("Accept", "text/event-stream")
+	New().ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if ct := rec.Header().Get("Content-Type"); !strings.HasPrefix(ct, "text/event-stream") {
+		t.Errorf("Content-Type = %q, want text/event-stream", ct)
+	}
+	for _, want := range []string{"event: datastar-patch-elements", `id="server-time"`, "Server time: "} {
+		if !strings.Contains(rec.Body.String(), want) {
+			t.Errorf("SSE response does not contain %q: %q", want, rec.Body.String())
+		}
+	}
+	if strings.Contains(rec.Body.String(), "Not requested yet") {
+		t.Error("SSE response still contains the initial placeholder")
 	}
 }
 

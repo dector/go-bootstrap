@@ -3,6 +3,7 @@ package server
 import (
 	"net/http"
 	"strings"
+	"time"
 
 	"mymyapp/internal/assets"
 	"mymyapp/internal/ui/components"
@@ -11,6 +12,7 @@ import (
 
 	"github.com/labstack/echo/v5"
 	"github.com/labstack/echo/v5/middleware"
+	"github.com/starfederation/datastar-go/datastar"
 )
 
 // New builds the HTTP handler and its routes.
@@ -39,8 +41,15 @@ func New() http.Handler {
 	})
 
 	e.GET("/health", healthHandler)
+	e.GET("/server-time", serverTimeHandler)
 
 	return e
+}
+
+func serverTimeHandler(c *echo.Context) error {
+	return datastar.NewSSE(c.Response(), c.Request()).PatchElementTempl(
+		pages.ServerTime(time.Now().UTC().Format(time.RFC3339Nano)),
+	)
 }
 
 // realIP mirrors chi's RealIP middleware, preferring the first forwarded IP.
