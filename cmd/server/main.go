@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"net/http"
 
 	"mymyapp/internal/config"
@@ -14,7 +15,7 @@ func main() {
 	fmt.Println(moto)
 
 	cfg := config.NewServerConfig()
-	addr := "127.0.0.1:" + cfg.Port
+	addr := net.JoinHostPort(cfg.Host, cfg.Port)
 	fmt.Printf("Running on http://%s\n", addr)
 	http.ListenAndServe(addr, server.New())
 }

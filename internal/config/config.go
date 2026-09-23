@@ -3,11 +3,13 @@ package config
 import "strconv"
 
 type ServerConfig struct {
+	Host string
 	Port string
 }
 
 func NewServerConfig() *ServerConfig {
 	return &ServerConfig{
+		Host: parseHostOrDefault(),
 		Port: parsePortOrDefault(),
 	}
 }
