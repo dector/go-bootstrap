@@ -16,8 +16,10 @@ github.com/coder/websocket v1.8.13/go.mod h1:LNVeNrXQZfe5qhS9ALED3uA+l5pPqvwXg3C
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/dector/gust v0.0.0-20260919170443-6f68b4c1853c h1:+dNFwECOkdUzu+681A7YLBZs6QqQfAqp4iHCtO9u9uk=
-github.com/dector/gust v0.0.0-20260919170443-6f68b4c1853c/go.mod h1:4R/C5q5nP4SY+GfWMAA/61mm2gyxuurykZNPSQ5tKvw=
+github.com/dector/gust v0.0.0-20260923030742-0de05ac3be15 h1:nYTqtelFlQG/jYPZNYNk/rgzI6V6XgzMHTtA87XYzVk=
+github.com/dector/gust v0.0.0-20260923030742-0de05ac3be15/go.mod h1:soyLG9tfSJaOB+cGZLXO2rzO7+Byes5Flp4ZdJk9maM=
+github.com/dector/serv v0.8.4-0.20260923002515-7a5ec94db582 h1:6fJUGa8cbwlCqbo3xQjwg5hrMLMUWAP9zJCoBmxNJF4=
+github.com/dector/serv v0.8.4-0.20260923002515-7a5ec94db582/go.mod h1:ocUqlzEjBBtqS2bInekbeQ9nmWVqNOHrJnce0XxvIV8=
 github.com/fatih/color v1.18.0 h1:S8gINlzdQ840/4pfAwic/ZE0djQEH3wM94VfqLTZcOM=
 github.com/fatih/color v1.18.0/go.mod h1:4FelSpRwEGDpQ12mAdzqdOukCy4u8WUtOY6lkT/6HfU=
 github.com/fsnotify/fsnotify v1.9.0 h1:2Ml+OJNzbYCTzsxtv8vKSFD9PbJjmhYF14k/jKC7S9k=

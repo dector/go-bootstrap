@@ -16,7 +16,8 @@ require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cli/browser v1.3.0 // indirect
 	github.com/coder/websocket v1.8.13 // indirect
-	github.com/dector/gust v0.0.0-20260919170443-6f68b4c1853c // indirect
+	github.com/dector/gust v0.0.0-20260923030742-0de05ac3be15 // indirect
+	github.com/dector/serv v0.8.4-0.20260923002515-7a5ec94db582 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
@@ -35,5 +36,5 @@ require (
 
 tool (
 	github.com/a-h/templ/cmd/templ
-	github.com/dector/gust/cmd/gust
+	github.com/dector/gust
 )
