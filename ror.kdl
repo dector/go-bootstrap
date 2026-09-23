@@ -7,6 +7,7 @@ task dev {
   cmd #"""
     go tool gust \
       -p "$PORT:$PROXY_PORT" \
+      - T \
       -e 'exec ror run' \
       --e.before 'ror gen' \
       --exclude out \
