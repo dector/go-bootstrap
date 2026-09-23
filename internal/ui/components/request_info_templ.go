@@ -165,7 +165,7 @@ func RequestInfo(data RequestData) templ.Component {
 			}
 		}
 		if len(data.Headers) > 0 {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "<div class=\"mb-4\"><div class=\"font-semibold text-neutral-300 mb-2\">Headers:</div><ul class=\"ml-6 space-y-1\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "<div class=\"mb-4\" data-signals=\"{showHeaders: true}\"><button type=\"button\" class=\"font-semibold text-neutral-300 mb-2 hover:text-white cursor-pointer\" data-on:click=\"$showHeaders = !$showHeaders\" data-attr:aria-expanded=\"$showHeaders\" aria-controls=\"request-headers\" aria-expanded=\"true\" data-text=\"$showHeaders ? 'Hide headers' : 'Show headers'\">Hide headers</button><ul id=\"request-headers\" class=\"ml-6 space-y-1\" data-show=\"$showHeaders\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

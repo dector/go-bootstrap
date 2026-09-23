@@ -20,6 +20,46 @@ func TestRootUsesRealClientIP(t *testing.T) {
 	if body := rec.Body.String(); !strings.Contains(body, "203.0.113.10") {
 		t.Errorf("response body does not contain forwarded client IP: %q", body)
 	}
+	for _, want := range []string{
+		`src="/assets/tailwindcss-browser-v4.3.3.js"`,
+		`type="module" src="/assets/datastar-v1.0.4.js"`,
+		`data-on:click="$showHeaders = !$showHeaders"`,
+		`data-show="$showHeaders"`,
+	} {
+		if !strings.Contains(rec.Body.String(), want) {
+			t.Errorf("root page does not contain %q", want)
+		}
+	}
+}
+
+func TestTailwindAsset(t *testing.T) {
+	rec := httptest.NewRecorder()
+	New().ServeHTTP(rec, httptest.NewRequest(http.MethodGet, "/assets/tailwindcss-browser-v4.3.3.js", nil))
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if ct := rec.Header().Get("Content-Type"); !strings.Contains(ct, "javascript") {
+		t.Errorf("Content-Type = %q, want JavaScript", ct)
+	}
+	if !strings.Contains(rec.Body.String(), "Minified by jsDelivr") {
+		t.Error("Tailwind asset body is missing")
+	}
+}
+
+func TestDatastarAsset(t *testing.T) {
+	rec := httptest.NewRecorder()
+	New().ServeHTTP(rec, httptest.NewRequest(http.MethodGet, "/assets/datastar-v1.0.4.js", nil))
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if ct := rec.Header().Get("Content-Type"); !strings.Contains(ct, "javascript") {
+		t.Errorf("Content-Type = %q, want JavaScript", ct)
+	}
+	if !strings.Contains(rec.Body.String(), "Datastar v1.0.4") {
+		t.Error("Datastar asset body is missing")
+	}
 }
 
 func TestHealth(t *testing.T) {

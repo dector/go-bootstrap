@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 
+	"mymyapp/internal/assets"
 	"mymyapp/internal/ui/components"
 	"mymyapp/internal/ui/pages"
 	"mymyapp/internal/utils"
@@ -18,6 +19,8 @@ func New() http.Handler {
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())
 	e.Use(realIP)
+
+	e.StaticFS("/assets/", assets.FS)
 
 	e.GET("/", func(c *echo.Context) error {
 		r := c.Request()

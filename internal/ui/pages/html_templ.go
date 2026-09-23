@@ -42,7 +42,7 @@ func Html(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</title><script src=\"https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4\"></script></head><body class=\"bg-neutral-900 text-neutral-100 min-h-screen\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</title><script src=\"/assets/tailwindcss-browser-v4.3.3.js\"></script><script type=\"module\" src=\"/assets/datastar-v1.0.4.js\"></script></head><body class=\"bg-neutral-900 text-neutral-100 min-h-screen\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
