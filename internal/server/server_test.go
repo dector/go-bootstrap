@@ -1,10 +1,26 @@
-package main
+package server
 
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
+
+func TestRootUsesRealClientIP(t *testing.T) {
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	req.Header.Set("X-Forwarded-For", "203.0.113.10, 198.51.100.5")
+	rec := httptest.NewRecorder()
+
+	New().ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if body := rec.Body.String(); !strings.Contains(body, "203.0.113.10") {
+		t.Errorf("response body does not contain forwarded client IP: %q", body)
+	}
+}
 
 func TestHealth(t *testing.T) {
 	tests := []struct {
@@ -97,7 +113,7 @@ func TestHealth(t *testing.T) {
 			}
 			rec := httptest.NewRecorder()
 
-			newRouter().ServeHTTP(rec, req)
+			New().ServeHTTP(rec, req)
 
 			if rec.Code != tt.wantStatus {
 				t.Errorf("status = %d, want %d", rec.Code, tt.wantStatus)

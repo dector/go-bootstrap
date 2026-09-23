@@ -1,10 +1,10 @@
 module mymyapp
 
-go 1.24.1
+go 1.27.1
 
 require (
 	github.com/a-h/templ v0.3.920
-	github.com/go-chi/chi/v5 v5.2.2
+	github.com/labstack/echo/v5 v5.3.1
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -21,11 +21,12 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
-	golang.org/x/mod v0.24.0 // indirect
-	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/sync v0.14.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/tools v0.33.0 // indirect
+	golang.org/x/mod v0.37.0 // indirect
+	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/sync v0.22.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/time v0.15.0 // indirect
+	golang.org/x/tools v0.47.0 // indirect
 )
 
 tool (
